@@ -1,0 +1,4 @@
+# Requirements of MCBot.py
+discord.py
+mcstatus
+python-dotenv
