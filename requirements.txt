@@ -1,4 +1,5 @@
 # Requirements of MCBot.py
+# Usage: pip install -r requirements.txt
 discord.py
 mcstatus
 python-dotenv
