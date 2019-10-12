@@ -43,8 +43,18 @@ if __name__ == "__main__":
             try:
                 server = MinecraftServer.lookup(server_ip + ":" + server_port)
                 status = server.status()
+                desc = status.description['text']
+                
+                # Check list of known servers
+                with open("servers.txt") as f:
+                    for line in f:
+                        line = line.strip()
+                        if line in desc:
+                            name = line
+                
+                name = name + ": {0}".format(status.players.online)
     
-                activity = discord.Game(name="{0} Online".format(status.players.online))
+                activity = discord.Game(name=name)
                 await client.change_presence(status = discord.Status.online,
                                              activity = activity)
 
