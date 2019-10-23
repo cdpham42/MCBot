@@ -42,7 +42,7 @@ if __name__ == "__main__":
     @client.event
     async def on_ready():
         print("MCBot has connected to Discord!")
-        print("Connecting to " + server_ip + ":" + server_port)
+        print("Connecting to {}:{}".format(server_ip,server_port))
         
     @client.event
     async def update():
@@ -52,21 +52,21 @@ if __name__ == "__main__":
                 server = MinecraftServer.lookup(server_ip + ":" + server_port)
                 status = server.status()
                 desc = status.description['text']
-                for key, value in servers:
+                name = "Online"
+                for key in servers:
                     if key in desc:
-                        name = value
-                    else:
-                        name = "Online"
+                        name = servers[key]
                 
-                name = name + ": {0}".format(status.players.online)
+                game = name + ": {0}".format(status.players.online)
     
-                activity = discord.Game(name=name)
+                activity = discord.Game(name=game)
                 await client.change_presence(status = discord.Status.online,
                                              activity = activity)
 
                 print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-                print("Players Online: {0}".format(status.players.online))
-                print("Server Ping: {0}\n".format(status.latency))
+                print("Server Name: {}".format(name))
+                print("Server Ping: {}".format(status.latency))
+                print("Players Online: {}\n".format(status.players.online))
 
             except:
                 activity = discord.Game(name="Server Offline")
