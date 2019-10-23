@@ -30,10 +30,18 @@ if __name__ == "__main__":
     server_port = os.getenv("SERVER_PORT").replace('{','').replace('}','').replace('\"','')
     
     client = discord.Client()
+    
+    servers = {}
+
+    # Check list of known servers
+    with open("servers.txt") as f:
+        for line in f:
+            key, value = line.split(",")
+            servers[key] = value
 
     @client.event
     async def on_ready():
-        print("{client.user} has connected to Discord!")
+        print("MCBot has connected to Discord!")
         print("Connecting to " + server_ip + ":" + server_port)
         
     @client.event
@@ -44,13 +52,11 @@ if __name__ == "__main__":
                 server = MinecraftServer.lookup(server_ip + ":" + server_port)
                 status = server.status()
                 desc = status.description['text']
-                
-                # Check list of known servers
-                with open("servers.txt") as f:
-                    for line in f:
-                        line = line.strip()
-                        if line in desc:
-                            name = line
+                for key, value in servers:
+                    if key in desc:
+                        name = value
+                    else:
+                        name = "Online"
                 
                 name = name + ": {0}".format(status.players.online)
     

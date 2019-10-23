@@ -1,2 +1,3 @@
-This Land
-StoneBlock
+Land,This Land
+StoneBlock,StoneBlock
+Rice,Wet Rice
