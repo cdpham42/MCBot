@@ -63,10 +63,10 @@ if __name__ == "__main__":
                 await client.change_presence(status = discord.Status.online,
                                              activity = activity)
 
-                print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-                print("Server Name: {}".format(name))
-                print("Server Ping: {}".format(status.latency))
-                print("Players Online: {}\n".format(status.players.online))
+                # print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+                # print("Server Name: {}".format(name))
+                # print("Server Ping: {}".format(status.latency))
+                # print("Players Online: {}\n".format(status.players.online))
 
             except:
                 activity = discord.Game(name="Server Offline")
